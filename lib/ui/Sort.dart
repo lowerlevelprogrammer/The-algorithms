@@ -16,14 +16,14 @@ class _Sort extends State<Sort> {
   @override
   void initState() {
     super.initState();
-    array = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
     generateRandomArray();
   }
 
   void generateRandomArray() {
 
     var range = Random();
-    array = List.generate(10, (_) => range.nextInt(100));
+    
+    array = List.generate(10, (_) => range.nextInt(200));
   }
   
   @override
