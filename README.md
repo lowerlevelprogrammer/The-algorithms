@@ -1,4 +1,6 @@
-<a href=""><img src="https://raw.githubusercontent.com/sumeet221b/The-algorithms/master/assets/neural.png" title="" alt="FVCproductions"></a>
+<h3 align="center"><img src="https://raw.githubusercontent.com/sumeet221b/The-algorithms/master/assets/neural.png" width="200px"></h3>
+
+<p align="center">Generate and change color-schemes on the fly.</p>
 
 # thealgorihms
 
