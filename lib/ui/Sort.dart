@@ -7,7 +7,7 @@ class Sort extends StatefulWidget {
 }
 
 class _Sort extends State<Sort> {
-  double _value = 10;
+  double _value = 1;
   int _radioValue1 = 1;
   bool _checkBoxValue = false;
 
@@ -21,9 +21,10 @@ class _Sort extends State<Sort> {
 
   void generateRandomArray() {
 
-    var range = Random();
-    
-    array = List.generate(10, (_) => range.nextInt(200));
+    var range = Random();    
+    int barCount = 10 * _value.toInt();
+
+    array = List.generate(barCount, (_) => range.nextInt(200));
   }
   
   @override
@@ -33,11 +34,9 @@ class _Sort extends State<Sort> {
         title: Text("The Algorithms"),
       ),
       body: Container(
-        color: Colors.yellow,
         child: Column(
           children: <Widget>[
             Container(
-              color: Colors.grey,
               margin: EdgeInsets.all(8.0),
               child: Row(
                 children: <Widget>[
@@ -70,6 +69,7 @@ class _Sort extends State<Sort> {
                       setState(() {
                         _value = value.toInt().toDouble();
                         print('Slider value: $_value');
+                        generateRandomArray();
                       });
                     },
                   ),
@@ -124,11 +124,7 @@ class _Sort extends State<Sort> {
                     width: 100.0,
                   ),
                   RaisedButton(
-                    onPressed: () {
-                      setState(() {
-                        array.add(100);
-                      });
-                    },
+                    onPressed: () {},
                     child: Text("Sort"),
                     color: Colors.blue,
                   )
@@ -166,8 +162,7 @@ class _Sort extends State<Sort> {
 
 class DrawBars extends CustomPainter {
 
-  int barCount;
-
+  double barWidth;
   List<int> array;
 
   DrawBars({this.array});
@@ -184,10 +179,12 @@ class DrawBars extends CustomPainter {
     canvas.drawLine(startPoint, endPoint, paint);
 
     // Draw sart and end points
-    
     // Get working area
     start = Offset(100, size.height - 50);
     end = Offset(size.width - 100, size.height - 50);
+
+    barWidth = (end.dx - start.dx) / array.length;
+    
 
     // Draw circles
     canvas.drawCircle(start, 5, paint);
@@ -195,12 +192,13 @@ class DrawBars extends CustomPainter {
 
     // Draw bars
     for(int i = 0; i < array.length; i++) {
+
       if(i % 2 == 0) {
         paint.color = Colors.blue;
       } else {
-        paint.color = Colors.black;
+        paint.color = Colors.blue.shade200;
       }      
-      canvas.drawRect(Rect.fromLTWH(start.dx + (i * 20), start.dy - (array[i]), 20.0, (array[i]).toDouble()), paint);
+      canvas.drawRect(Rect.fromLTWH(start.dx + (i * barWidth), start.dy - (array[i]), barWidth, (array[i]).toDouble()), paint);
     }
 
   }
